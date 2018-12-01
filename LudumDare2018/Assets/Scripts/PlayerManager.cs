@@ -7,6 +7,10 @@ public class PlayerManager : MonoBehaviour {
     SpriteRenderer spriteRenderer;
     Rigidbody2D rb2D;
 
+    public Timebar timeBar;
+    float timeLeft;
+    float maxTime;
+
     Vector2 actualVelocity;
 
     bool clicked;
@@ -18,6 +22,7 @@ public class PlayerManager : MonoBehaviour {
     float startTime;
     Vector3 intialPos;
     Vector3 mouseInitialPos;
+    public float mouseMaxDrag;
 
     public float velocity;
 
@@ -27,6 +32,8 @@ public class PlayerManager : MonoBehaviour {
         rb2D = GetComponent<Rigidbody2D>();
         clicked = false;
         moving = false;
+
+        maxTime = timeLeft = 100;
 
         dragAcceleration = -(velocity * velocity) / (2 * MaxDistance);
     }
@@ -40,28 +47,32 @@ public class PlayerManager : MonoBehaviour {
     {
         if (clicked){
             Vector3 direction = mouseInitialPos - Input.mousePosition;
+            float mouseDragAmount = Mathf.Clamp(direction.magnitude/mouseMaxDrag,0,1);
+            timeBar.showHealthLossPercent((timeLeft - (1*mouseDragAmount))/maxTime);
+
             if (Input.GetMouseButtonUp(0))
-            {
-                
+            {  
                 setVelocity(direction.normalized * velocity);
 
                 clicked = false;
                 moving = true;
                 startTime = Time.time;
-                intialPos = transform.position;
+                timeLeft-=1*mouseDragAmount;
+                timeBar.setHealthPercent(timeLeft/maxTime);
+
             }
         }
-        if (moving){
+        if (moving)
+        {
             setVelocity(actualVelocity.normalized * (velocity + (dragAcceleration * (Time.time - startTime))));
-            if (rb2D.velocity.magnitude <= 0.05)
+            if (rb2D.velocity.magnitude <= 0.1)
             {
-                Debug.Log((transform.position - intialPos).magnitude);
                 moving = false;
                 setVelocity(new Vector2(0, 0));
             }
         }
-
     }
+
 
     private void OnMouseDown()
     {
@@ -76,7 +87,6 @@ public class PlayerManager : MonoBehaviour {
         {
             //setVelocity(collision.gameObject.GetComponent<BounceOfCollider>().GetDirection(actualVelocity));
             setVelocity(Vector2.Reflect(actualVelocity, collision.GetContact(0).normal));
-            Debug.Log(rb2D.velocity.magnitude);
         }
     }
 }
