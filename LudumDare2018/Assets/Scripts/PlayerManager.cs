@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerManager : MonoBehaviour {
     //other components
@@ -25,6 +23,7 @@ public class PlayerManager : MonoBehaviour {
 
     //movement tracking
     float startMovementTime;
+    Vector3 position;
 
     //velocity control
     Vector2 actualVelocity;
@@ -57,8 +56,6 @@ public class PlayerManager : MonoBehaviour {
         //we get the times 
         //TODO(should be changed to getting them from singleton)
         maxTime = timeLeft = 100;
-
-        numOfAlumn++;
 
         arrow = transform.GetChild(0).gameObject.GetComponent<DirectionArrow>();
         arrow.SetActive(false);
@@ -94,6 +91,7 @@ public class PlayerManager : MonoBehaviour {
             //cuando deja ir el click
             if (Input.GetMouseButtonUp(0))
             {
+                position = transform.position;
                 //cambiamos el color 
                 //TODO activar animación
                 spriteRenderer.color = new Color(1, 1, 1);
@@ -127,6 +125,7 @@ public class PlayerManager : MonoBehaviour {
             setVelocity(initialVelocity.normalized * (velocity + (dragAcceleration * (Time.time - startMovementTime))));
             if (checkMovementStop())
             {
+                Debug.Log((transform.position - position).magnitude);
                 moving = false;
                 setVelocity(new Vector2(0, 0));
             }
@@ -164,16 +163,20 @@ public class PlayerManager : MonoBehaviour {
             //rotate the gameobject
             transform.rotation = Quaternion.Euler(0, 0, Mathf.Rad2Deg * Mathf.Atan2(actualVelocity.y, actualVelocity.x));
         }
-        else if(collision.gameObject.tag == "Alumno"){
-            
-
-            float movementLeft = mouseDragAmount* MaxDistance*(1- (dragAmount * numOfAlumn ))- (initialVelocity.magnitude * startMovementTime + dragAcceleration * startMovementTime * startMovementTime / 2);
-            Debug.Log((velocity * startMovementTime + dragAcceleration * startMovementTime * startMovementTime / 2));
-            numOfAlumn++;
-            
-            calculateDragAccel(actualVelocity.magnitude, movementLeft);
-            collision.gameObject.SetActive(false);
-        }
+        
      }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Alumno")
+        {
+
+
+            float movementLeft = mouseDragAmount * MaxDistance * (1 - (dragAmount * numOfAlumn)) - (initialVelocity.magnitude * (Time.time - startMovementTime) + dragAcceleration *Mathf.Pow(Time.time-startMovementTime,2)/ 2);
+            numOfAlumn++;
+
+            calculateDragAccel(actualVelocity.magnitude, movementLeft);
+            other.gameObject.SetActive(false);
+        }
+    }
 }
 
