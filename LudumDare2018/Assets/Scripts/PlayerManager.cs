@@ -25,7 +25,6 @@ public class PlayerManager : MonoBehaviour {
 
     //movement tracking
     float startMovementTime;
-    Vector3 intialPos;
 
     //velocity control
     Vector2 actualVelocity;
@@ -34,10 +33,13 @@ public class PlayerManager : MonoBehaviour {
     //mouse controls
     Vector3 mouseInitialPos;
     public float mouseMaxDrag;
+    float mouseDragAmount;
 
+    //alumnos
+    int numOfAlumn;
+    float dragAmount = 0.05f;
 
     //arrow 
-    //GameObject arrowObj;
     DirectionArrow arrow;
     
 
@@ -55,6 +57,8 @@ public class PlayerManager : MonoBehaviour {
         //we get the times 
         //TODO(should be changed to getting them from singleton)
         maxTime = timeLeft = 100;
+
+        numOfAlumn++;
 
         arrow = transform.GetChild(0).gameObject.GetComponent<DirectionArrow>();
         arrow.SetActive(false);
@@ -76,7 +80,7 @@ public class PlayerManager : MonoBehaviour {
         if (clicked){
             //we check the direction and the percentage of the max amount a player
             Vector3 direction = mouseInitialPos - Input.mousePosition;
-            float mouseDragAmount = Mathf.Clamp(direction.magnitude/mouseMaxDrag,0,1);
+            mouseDragAmount = Mathf.Clamp(direction.magnitude/mouseMaxDrag,0,1);
 
             //rotate the gameobject
             transform.rotation = Quaternion.Euler(0,0,Mathf.Rad2Deg*Mathf.Atan2(direction.y, direction.x));
@@ -98,7 +102,8 @@ public class PlayerManager : MonoBehaviour {
                 initialVelocity=actualVelocity;
 
                 //calculamos el drag necesario para que se mueva solo esa distancia
-                calculateDragAccel(velocity, MaxDistance * mouseDragAmount);
+                calculateDragAccel(velocity, MaxDistance * mouseDragAmount*(1-(numOfAlumn*dragAmount)));
+
                 //cambiamos de estado
                 clicked = false;
                 moving = true;
@@ -111,7 +116,7 @@ public class PlayerManager : MonoBehaviour {
                 timeLeft-=1*mouseDragAmount;
                 timeBar.setHealthPercent(timeLeft/maxTime);
 
-
+                //desactivamos la flecha
                 arrow.SetActive(false);
             }
         }
@@ -159,6 +164,16 @@ public class PlayerManager : MonoBehaviour {
             //rotate the gameobject
             transform.rotation = Quaternion.Euler(0, 0, Mathf.Rad2Deg * Mathf.Atan2(actualVelocity.y, actualVelocity.x));
         }
-    }
+        else if(collision.gameObject.tag == "Alumno"){
+            
+
+            float movementLeft = mouseDragAmount* MaxDistance*(1- (dragAmount * numOfAlumn ))- (initialVelocity.magnitude * startMovementTime + dragAcceleration * startMovementTime * startMovementTime / 2);
+            Debug.Log((velocity * startMovementTime + dragAcceleration * startMovementTime * startMovementTime / 2));
+            numOfAlumn++;
+            
+            calculateDragAccel(actualVelocity.magnitude, movementLeft);
+            collision.gameObject.SetActive(false);
+        }
+     }
 }
 
