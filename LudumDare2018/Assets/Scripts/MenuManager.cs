@@ -7,7 +7,7 @@ public class MenuManager : MonoBehaviour {
     [System.NonSerialized]
     public int currentLevel;
 
-    public float maxTime;
+    public float maxTime=1000;
 
     public void reload()
     {
