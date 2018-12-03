@@ -13,6 +13,7 @@ public class PlayerManager : MonoBehaviour {
     bool clicked;
     bool moving;
     public bool started;
+    bool dead;
 
     [Header("Timebar")]
     public TimebarArray timeBar;
@@ -65,6 +66,7 @@ public class PlayerManager : MonoBehaviour {
         clicked = false;
         moving = false;
         started = false;
+        dead = true;
 
         //we get the times 
         maxTime =  Timemanager.Instance.getMaxTime()/timeBar.getNumberOfBars();

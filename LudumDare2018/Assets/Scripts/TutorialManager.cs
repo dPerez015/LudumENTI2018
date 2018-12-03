@@ -43,7 +43,7 @@ public class TutorialManager : MonoBehaviour {
         }
         if(lastStage && !TutorialStages[currentID].isPlaying())
         {
-            SceneManager.LoadScene("SampleScene");
+            SceneManager.LoadScene("Level0");
         }
 	}
 
