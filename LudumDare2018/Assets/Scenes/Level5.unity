@@ -975,6 +975,11 @@ Prefab:
       propertyPath: particles
       value: 
       objectReference: {fileID: 1011780476}
+    - target: {fileID: 114634813309267662, guid: b45c9517da6b5a5479a09fb56ca1da97,
+        type: 2}
+      propertyPath: currentLevel
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b45c9517da6b5a5479a09fb56ca1da97, type: 2}
   m_IsPrefabAsset: 0
