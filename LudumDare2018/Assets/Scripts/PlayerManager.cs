@@ -13,7 +13,6 @@ public class PlayerManager : MonoBehaviour {
     bool clicked;
     bool moving;
     public bool started;
-    bool dead;
 
     [Header("Timebar")]
     public TimebarArray timeBar;
@@ -66,7 +65,6 @@ public class PlayerManager : MonoBehaviour {
         clicked = false;
         moving = false;
         started = false;
-        dead = true;
 
         //we get the times 
         maxTime =  Timemanager.Instance.getMaxTime()/timeBar.getNumberOfBars();
@@ -82,6 +80,12 @@ public class PlayerManager : MonoBehaviour {
     private void calculateDragAccel(float vel, float mDist)
     {
         dragAcceleration = -(vel * vel) / (2 * mDist);
+    }
+
+    public void reload()
+    {
+        transform.position = manager.getInitialPos();
+        //anim.Play("Idle");
     }
 
     public void setVelocity(Vector2 v){
@@ -206,12 +210,16 @@ public class PlayerManager : MonoBehaviour {
             moving = false;
             anim.SetBool("Moving",false);
         }
+        else if(collision.gameObject.tag == "Fuego")
+        {
+            setVelocity(new Vector2(0,0));
+            moving = false;
+            anim.Play("SlimeDie");
+            collision.gameObject.SetActive(false);
+        }
      }
 
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        anim.SetBool("Hit", false);
-    }
+
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -246,7 +254,8 @@ public class PlayerManager : MonoBehaviour {
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        
+        if (!collision.isTrigger)
+            anim.SetBool("Hit", false);
 
         if (collision.gameObject.tag == "LoseAlum")
         {

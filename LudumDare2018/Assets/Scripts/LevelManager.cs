@@ -49,6 +49,11 @@ public class LevelManager : MonoBehaviour {
         Instantiate(alumno, position, rotation);
     }
 
+    public Vector3 getInitialPos()
+    {
+        return CharacterStartPosition.transform.position;
+    }
+
     void Start()
     {
         state = State.Intro;
