@@ -12,7 +12,7 @@ public class VictoryManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        int roomsNum = Timemanager.Instance.roomsCleared;
+        int roomsNum = Timemanager.Instance.roomsCleared+1;
         int studentsRescued = Timemanager.Instance.totalNumberOfAlum;
         float timeleft = Timemanager.Instance.getCurrentTime();
 
