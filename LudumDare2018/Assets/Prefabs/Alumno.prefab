@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4823424262269506}
   - component: {fileID: 212389476919151898}
   - component: {fileID: 58293128230109570}
+  - component: {fileID: 95231380087130292}
   m_Layer: 0
   m_Name: Alumno
   m_TagString: Alumno
@@ -35,7 +36,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1350802677879938}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.57, y: 0.19, z: 0}
+  m_LocalPosition: {x: -1.0109167, y: 1.9942205, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -56,6 +57,24 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.32
+--- !u!95 &95231380087130292
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1350802677879938}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 180aab0c3802c6f40883a4c3d958855a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!212 &212389476919151898
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -91,8 +110,8 @@ SpriteRenderer:
   m_SortingLayerID: -1807105541
   m_SortingLayer: 2
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: be8167a72d9b9ea4c88fd3ed529fba5d, type: 3}
-  m_Color: {r: 0.246707, g: 0.28342587, b: 0.8301887, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 05c7855bc5fb45145a9b69fb1e37ec1e, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
