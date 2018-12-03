@@ -48,8 +48,8 @@ public class TutorialManager : MonoBehaviour {
         
         if(lastStage && !TutorialStages[currentID].isPlaying())
         {
-            Timemanager.Instance.setMaxTime(800);
-            Timemanager.Instance.setCurrentTime(800);
+            Timemanager.Instance.setMaxTime(1000);
+            Timemanager.Instance.setCurrentTime(1000);
             SceneManager.LoadScene("Level0");
         }
 	}

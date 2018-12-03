@@ -16,6 +16,17 @@ public class TimebarArray : MonoBehaviour {
 	void Update () {
 		
 	}
+    public void setHealthPercentInstant(float t) {
+        float id = bars.Length - Mathf.Ceil(t);
+        for (int i = 0; i < id; i++)
+            bars[i].SetActive(false);
+        if (id < bars.Length)
+            bars[(int)id].GetComponent<Timebar>().setHealthPercentInstant(t - Mathf.Ceil(t - 1));
+        else
+        {
+            bars[bars.Length - 1].SetActive(false);
+        }
+    }
 
     public void setHealthPercent(float t)
     {

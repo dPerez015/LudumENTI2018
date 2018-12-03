@@ -12,6 +12,13 @@ public class Timebar : MonoBehaviour {
 
     float startLifeLossTime;
     
+    public void setHealthPercentInstant(float p)
+    {
+        health.fillAmount = p;
+        healthLoss.fillAmount = p;
+    }
+    
+
     public void setHealthPercent(float p)
     {
         health.fillAmount = p;

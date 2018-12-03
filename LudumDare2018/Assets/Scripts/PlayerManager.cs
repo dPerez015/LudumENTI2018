@@ -69,7 +69,7 @@ public class PlayerManager : MonoBehaviour {
         //we get the times 
         maxTime =  Timemanager.Instance.getMaxTime()/timeBar.getNumberOfBars();
         timeLeft = Timemanager.Instance.getCurrentTime();
-        timeBar.setHealthPercent(timeLeft / maxTime);
+        timeBar.setHealthPercentInstant(timeLeft / maxTime);
 
         arrow = transform.GetChild(0).gameObject.GetComponent<DirectionArrow>();
         arrow.SetActive(false);

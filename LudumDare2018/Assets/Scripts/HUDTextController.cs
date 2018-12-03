@@ -14,7 +14,7 @@ public class HUDTextController : MonoBehaviour {
 	void Start () {
         levelManager = GameObject.Find("Level Manager");
         int currentLevel=levelManager.GetComponent<LevelManager>().getLevelNumber();
-        level.text = currentLevel.ToString() + "/15";
+        level.text = (currentLevel+1).ToString() + "/15";
         player = levelManager.GetComponent<LevelManager>().getCharacter();
 	}
 	
