@@ -7,6 +7,7 @@ public class PlayerManager : MonoBehaviour {
     Rigidbody2D rb2D;
     Camera cam;
     LevelManager manager;
+    Animator anim;
 
     //states
     bool clicked;
@@ -59,7 +60,7 @@ public class PlayerManager : MonoBehaviour {
         rb2D = GetComponent<Rigidbody2D>();
         cam = GameObject.Find("Main Camera").GetComponent<Camera>();
         manager = GameObject.Find("Level Manager").GetComponent<LevelManager>();
-
+        anim = GetComponent<Animator>();
         //set states to false
         clicked = false;
         moving = false;
@@ -106,6 +107,10 @@ public class PlayerManager : MonoBehaviour {
                 //we show the player how much will that movement cost
                 timeBar.showHealthLossPercent((timeLeft - (1 + MaxDistance * mouseDragAmount * (1 - numOfAlumn * dragAmount))) / maxTime);
 
+                //change scale
+                transform.localScale = new Vector3(Mathf.Lerp(1, 1.8f, mouseDragAmount), Mathf.Lerp(1, 0.7f, mouseDragAmount), 1);
+                anim.SetFloat("MouseDragAmount", mouseDragAmount);
+
                 //cuando deja ir el click
                 if (Input.GetMouseButtonUp(0))
                 {
@@ -134,6 +139,11 @@ public class PlayerManager : MonoBehaviour {
 
                     //desactivamos la flecha
                     arrow.SetActive(false);
+
+                    //Iniciamos la animacion
+                    anim.SetBool("Clicked", false);
+                    anim.SetBool("Moving", true);
+                    transform.localScale = new Vector3(1, 1, 1);
                 }
             }
             //cuando se esta moviendo 
@@ -145,6 +155,8 @@ public class PlayerManager : MonoBehaviour {
                 {
                     moving = false;
                     setVelocity(new Vector2(0, 0));
+                    GetComponent<Animator>().SetBool("Moving", false);
+
                     if (timeLeft <= 0)
                         SceneManager.LoadScene("GameOver");
                 }
@@ -170,11 +182,14 @@ public class PlayerManager : MonoBehaviour {
             mouseInitialPos = cam.WorldToScreenPoint(transform.position);
             clicked = true;
             arrow.SetActive(true);
+
+            anim.SetBool("Clicked", true);
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        
         if (collision.gameObject.tag == "Collider")
         {
             //setVelocity(collision.gameObject.GetComponent<BounceOfCollider>().GetDirection(actualVelocity));
@@ -187,11 +202,22 @@ public class PlayerManager : MonoBehaviour {
         {
             setVelocity(new Vector2(0, 0));
             moving = false;
+            anim.SetBool("Moving",false);
         }
      }
 
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        anim.SetBool("Hit", false);
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (!other.isTrigger)
+        {
+            anim.SetBool("Hit", true);
+        }
+
         if (other.gameObject.tag == "Alumno")
         {
             //float movementLeft = mouseDragAmount * MaxDistance * (1 - (dragAmount * numOfAlumn)) - (initialVelocity.magnitude * (Time.time - startMovementTime) + dragAcceleration *Mathf.Pow(Time.time-startMovementTime,2)/ 2);
@@ -203,6 +229,7 @@ public class PlayerManager : MonoBehaviour {
         else if (other.gameObject.tag == "EndOfLevel")
         {
             manager.endLevel();
+            anim.SetBool("Moving", false);
         }
         else if (other.gameObject.tag == "SlowLiquid")
         {
@@ -213,11 +240,12 @@ public class PlayerManager : MonoBehaviour {
             dragMultiplier = dragMultiplierSpeed;
         }
 
-
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        
+
         if (collision.gameObject.tag == "LoseAlum")
         {
             if (numOfAlumn > 0)
