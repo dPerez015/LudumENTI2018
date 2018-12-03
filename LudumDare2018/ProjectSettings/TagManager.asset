@@ -12,6 +12,7 @@ TagManager:
   - SpeedLiquid
   - SlowLiquid
   - Fuego
+  - DontDestroyOnSceneExit
   layers:
   - Default
   - TransparentFX
