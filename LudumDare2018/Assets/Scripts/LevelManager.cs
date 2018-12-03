@@ -128,7 +128,7 @@ public class LevelManager : MonoBehaviour {
                     if (!isLastLevel)
                         SceneManager.LoadScene("Level" + (currentLevel + 1).ToString());
                     else
-                        SceneManager.LoadScene("MainMenu");
+                        SceneManager.LoadScene("Victory");
                 }
                 break;
             
