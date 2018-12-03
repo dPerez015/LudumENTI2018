@@ -82,8 +82,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1807307459228876}
-  m_LocalRotation: {x: -0, y: -0, z: 0.2502694, w: 0.96817625}
-  m_LocalPosition: {x: -12.08, y: -1.71, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.49, y: -5.51, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4769108759266974}
@@ -153,9 +153,10 @@ MonoBehaviour:
   started: 0
   timeBar: {fileID: 0}
   maxTime: 0
-  MaxDistance: 10
+  MaxDistance: 15
   velocity: 20
   mouseMaxDrag: 100
+  dragAmount: 0.05
 --- !u!114 &114637430353206090
 MonoBehaviour:
   m_ObjectHideFlags: 1
