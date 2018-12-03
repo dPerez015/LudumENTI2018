@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour {
     //other components
@@ -13,7 +14,7 @@ public class PlayerManager : MonoBehaviour {
     public bool started;
 
     [Header("Timebar")]
-    public Timebar timeBar;
+    public TimebarArray timeBar;
     float timeLeft;
     public float maxTime;
 
@@ -65,7 +66,7 @@ public class PlayerManager : MonoBehaviour {
         started = false;
 
         //we get the times 
-        maxTime =  Timemanager.Instance.getMaxTime();
+        maxTime =  Timemanager.Instance.getMaxTime()/timeBar.getNumberOfBars();
         timeLeft = Timemanager.Instance.getCurrentTime();
         timeBar.setHealthPercent(timeLeft / maxTime);
 
@@ -103,7 +104,7 @@ public class PlayerManager : MonoBehaviour {
                 arrow.setScale(mouseDragAmount);
 
                 //we show the player how much will that movement cost
-                timeBar.showHealthLossPercent((timeLeft - (1 * mouseDragAmount)) / maxTime);
+                timeBar.showHealthLossPercent((timeLeft - (1 + MaxDistance * mouseDragAmount * (1 - numOfAlumn * dragAmount))) / maxTime);
 
                 //cuando deja ir el click
                 if (Input.GetMouseButtonUp(0))
@@ -144,6 +145,8 @@ public class PlayerManager : MonoBehaviour {
                 {
                     moving = false;
                     setVelocity(new Vector2(0, 0));
+                    if (timeLeft <= 0)
+                        SceneManager.LoadScene("GameOver");
                 }
             }
         }

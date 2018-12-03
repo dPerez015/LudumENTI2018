@@ -34,10 +34,6 @@ public class Timemanager  {
         currentTime = t;
     }
 
-    public float getRateOverMaxTime(float tLeft)
-    {
-        return tLeft / maxTime;
-    }
     public float getCurrentTime()
     {
         return currentTime;
