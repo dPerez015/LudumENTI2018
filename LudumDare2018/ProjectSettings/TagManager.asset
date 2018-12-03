@@ -11,6 +11,7 @@ TagManager:
   - LoseAlum
   - SpeedLiquid
   - SlowLiquid
+  - Fuego
   layers:
   - Default
   - TransparentFX

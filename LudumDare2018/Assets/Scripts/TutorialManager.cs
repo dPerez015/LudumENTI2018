@@ -22,11 +22,12 @@ public class TutorialManager : MonoBehaviour {
     void activateStage(){
         animationsToPlay--;
         currentID++;
+        //currentID = Mathf.Clamp(currentID, 0, 1);
         for (int i = 0; i < TutorialStages.Length; i++)
         {
             TutorialStages[i].setActive(i == currentID);   
         }
-        if (currentID == TutorialStages.Length-1)
+        if (currentID >= TutorialStages.Length-1)
         {
             lastStage = true;
         }
@@ -35,14 +36,20 @@ public class TutorialManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         if (Input.GetKeyDown("return"))
-            animationsToPlay++;
-
-        if (!TutorialStages[currentID].isPlaying() && animationsToPlay>0)
         {
-            activateStage();
+            if(!lastStage)
+                animationsToPlay+=1;
         }
+            if (!TutorialStages[currentID].isPlaying() && animationsToPlay > 0)
+            {
+            if(!lastStage)
+                activateStage();
+            }
+        
         if(lastStage && !TutorialStages[currentID].isPlaying())
         {
+            Timemanager.Instance.setMaxTime(800);
+            Timemanager.Instance.setCurrentTime(800);
             SceneManager.LoadScene("Level0");
         }
 	}
