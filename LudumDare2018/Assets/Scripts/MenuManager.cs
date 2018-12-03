@@ -18,7 +18,7 @@ public class MenuManager : MonoBehaviour {
     {
         Timemanager.Instance.setMaxTime(maxTime);
         Timemanager.Instance.setCurrentTime(maxTime);
-        SceneManager.LoadScene("Level1");
+        SceneManager.LoadScene("Level0");
     }
 
     public void loadMenu()
