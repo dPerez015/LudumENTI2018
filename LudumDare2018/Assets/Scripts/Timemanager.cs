@@ -7,8 +7,8 @@ public class Timemanager  {
     private static readonly Timemanager instance=new Timemanager();
 
 
-    float maxTime;
-    float currentTime;
+    float maxTime=100;
+    float currentTime=100;
 
     static Timemanager()
     {
@@ -41,5 +41,9 @@ public class Timemanager  {
     public float getCurrentTime()
     {
         return currentTime;
+    }
+    public float getMaxTime()
+    {
+        return maxTime;
     }
 }
