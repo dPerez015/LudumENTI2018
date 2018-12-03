@@ -54,7 +54,16 @@ public class LevelManager : MonoBehaviour {
         return CharacterStartPosition.transform.position;
     }
 
-    void Start()
+    public PlayerManager getCharacter()
+    {
+        return Character.GetComponent<PlayerManager>();
+    }
+    public int getLevelNumber()
+    {
+        return currentLevel;
+    }
+
+    void Awake()
     {
         state = State.Intro;
         Character.GetComponent<CircleCollider2D>().enabled = false;
@@ -130,7 +139,10 @@ public class LevelManager : MonoBehaviour {
                 }
                 if (startTime > endAnimTime)
                 {
-                    if (!isLastLevel)
+                    Timemanager.Instance.roomsCleared++;
+                    Timemanager.Instance.totalNumberOfAlum += Character.GetComponent<PlayerManager>().numOfAlumn;
+                    Timemanager.Instance.setCurrentTime(Character.GetComponent<PlayerManager>().getTimeLeft());
+                    if (!isLastLevel) 
                         SceneManager.LoadScene("Level" + (currentLevel + 1).ToString());
                     else
                         SceneManager.LoadScene("Victory");

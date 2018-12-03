@@ -47,7 +47,7 @@ public class PlayerManager : MonoBehaviour {
     [Header("Alumnos")]
     [Tooltip("Porcentage de la distancia maxima que pierde por alumno recogido")]
     public float dragAmount = 0.05f;
-    int numOfAlumn;
+    public int numOfAlumn;
 
     //arrow 
     DirectionArrow arrow;
@@ -75,6 +75,10 @@ public class PlayerManager : MonoBehaviour {
         arrow.SetActive(false);
 
         dragMultiplier = 1;
+    }
+    public float getTimeLeft()
+    {
+        return timeLeft;
     }
 
     private void calculateDragAccel(float vel, float mDist)
@@ -140,7 +144,7 @@ public class PlayerManager : MonoBehaviour {
 
                     //we set the new time to the timebar
                     timeLeft -=1 + MaxDistance * mouseDragAmount * (1-numOfAlumn *dragAmount);
-                    Timemanager.Instance.setCurrentTime(timeLeft);
+                    //Timemanager.Instance.setCurrentTime(timeLeft);
                     timeBar.setHealthPercent(timeLeft / maxTime);
 
                     //desactivamos la flecha

@@ -10,6 +10,9 @@ public class Timemanager  {
     float maxTime=100;
     float currentTime=100;
 
+    public int totalNumberOfAlum;
+    public int roomsCleared;
+
     static Timemanager()
     {
 
@@ -28,6 +31,9 @@ public class Timemanager  {
     public void setMaxTime(float t)
     {
         maxTime = t;
+        totalNumberOfAlum = 0;
+        roomsCleared = 0;
+        totalNumberOfAlum = 0;
     }
     public void setCurrentTime(float t)
     {

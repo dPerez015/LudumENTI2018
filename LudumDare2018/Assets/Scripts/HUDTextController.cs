@@ -5,18 +5,21 @@ using UnityEngine.UI;
 
 public class HUDTextController : MonoBehaviour {
 
-    Text alumnos;
-    Text level;
+    public Text alumnos;
+    public Text level;
 
     GameObject levelManager;
+    PlayerManager player;
 	// Use this for initialization
 	void Start () {
         levelManager = GameObject.Find("Level Manager");
-        levelManager.GetComponent<LevelManager>().getLevelNumber();
+        int currentLevel=levelManager.GetComponent<LevelManager>().getLevelNumber();
+        level.text = currentLevel.ToString() + "/15";
+        player = levelManager.GetComponent<LevelManager>().getCharacter();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+        alumnos.text = player.numOfAlumn.ToString();
 	}
 }
