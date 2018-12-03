@@ -73,7 +73,7 @@ public class LevelManager : MonoBehaviour {
     {
         Character.GetComponent<PlayerManager>().started = false;
         Character.GetComponent<PlayerManager>().setVelocity(new Vector2(0, 0));
-        particles.Play();
+        //particles.Play();
         startTime = 0;
         initialPlayerPos = Character.transform.position;
         fadeImg.color = new Color(0, 0, 0, 0);
