@@ -194,10 +194,10 @@ public class PlayerManager : MonoBehaviour {
     {
         if (other.gameObject.tag == "Alumno")
         {
-            float movementLeft = mouseDragAmount * MaxDistance * (1 - (dragAmount * numOfAlumn)) - (initialVelocity.magnitude * (Time.time - startMovementTime) + dragAcceleration *Mathf.Pow(Time.time-startMovementTime,2)/ 2);
+            //float movementLeft = mouseDragAmount * MaxDistance * (1 - (dragAmount * numOfAlumn)) - (initialVelocity.magnitude * (Time.time - startMovementTime) + dragAcceleration *Mathf.Pow(Time.time-startMovementTime,2)/ 2);
             numOfAlumn++;
 
-            calculateDragAccel(actualVelocity.magnitude, movementLeft);
+            //calculateDragAccel(actualVelocity.magnitude, movementLeft);
             Destroy(other.gameObject);
         }
         else if (other.gameObject.tag == "EndOfLevel")
