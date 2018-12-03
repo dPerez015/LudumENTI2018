@@ -35,7 +35,7 @@ public class PreMenu : MonoBehaviour {
         if (timer > 7 && timer < 11)
         {
 
-            slimesensei.transform.position += new Vector3(1, 1) * Time.deltaTime * 100;
+            slimesensei.transform.position += new Vector3(1, 1) * Time.deltaTime * 150;
         }
         if (timer > 9)
         {
