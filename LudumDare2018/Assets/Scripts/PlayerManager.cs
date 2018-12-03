@@ -21,6 +21,10 @@ public class PlayerManager : MonoBehaviour {
     public float MaxDistance;
     float dragAcceleration;
     public float velocity;
+    [System.NonSerialized]
+    public float dragMultiplier;
+    public float dragMultiplierSpeed;
+    public float dragMultiplierSlow;
 
 
     //movement tracking
@@ -67,6 +71,8 @@ public class PlayerManager : MonoBehaviour {
 
         arrow = transform.GetChild(0).gameObject.GetComponent<DirectionArrow>();
         arrow.SetActive(false);
+
+        dragMultiplier = 1;
     }
 
     private void calculateDragAccel(float vel, float mDist)
@@ -133,7 +139,7 @@ public class PlayerManager : MonoBehaviour {
             else if (moving)
             {
                 //seteamos la velocidad según el tiempo que ha transcurrido desde el inicio
-                setVelocity(initialVelocity.normalized * (velocity + (dragAcceleration * (Time.time - startMovementTime))));
+                setVelocity(initialVelocity.normalized * (velocity + (dragAcceleration*dragMultiplier * (Time.time - startMovementTime))));
                 if (checkMovementStop())
                 {
                     moving = false;
@@ -195,7 +201,15 @@ public class PlayerManager : MonoBehaviour {
         {
             manager.endLevel();
         }
-        
+        else if (other.gameObject.tag == "SlowLiquid")
+        {
+            dragMultiplier = dragMultiplierSlow;
+        }
+        else if (other.gameObject.tag == "SpeedLiquid")
+        {
+            dragMultiplier = dragMultiplierSpeed;
+        }
+
 
     }
 
@@ -212,6 +226,15 @@ public class PlayerManager : MonoBehaviour {
 
             }
         }
+        else if (collision.gameObject.tag == "SlowLiquid")
+        {
+            dragMultiplier = 1;
+        }
+        else if (collision.gameObject.tag == "SpeedLiquid")
+        {
+            dragMultiplier = 1;
+        }
+
     }
 }
 

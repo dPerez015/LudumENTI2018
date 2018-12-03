@@ -9,6 +9,8 @@ TagManager:
   - EndOfLevel
   - Pinchos
   - LoseAlum
+  - SpeedLiquid
+  - SlowLiquid
   layers:
   - Default
   - TransparentFX
