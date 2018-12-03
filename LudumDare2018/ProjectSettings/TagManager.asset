@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Collider
   - Alumno
+  - EndOfLevel
+  - Pinchos
+  - LoseAlum
   layers:
   - Default
   - TransparentFX
