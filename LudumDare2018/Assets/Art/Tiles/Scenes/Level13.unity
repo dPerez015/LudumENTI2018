@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 39504561}
   m_Layer: 0
   m_Name: CubeCol (2)
-  m_TagString: Untagged
+  m_TagString: Collider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2435,7 +2435,7 @@ GameObject:
   - component: {fileID: 752797001}
   m_Layer: 0
   m_Name: CubeCol (1)
-  m_TagString: Untagged
+  m_TagString: Collider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12987,7 +12987,7 @@ GameObject:
   - component: {fileID: 1796318996}
   m_Layer: 0
   m_Name: CubeCol
-  m_TagString: Untagged
+  m_TagString: Collider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
