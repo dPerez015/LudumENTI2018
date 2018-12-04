@@ -125,9 +125,7 @@ public class PlayerManager : MonoBehaviour {
                 if (Input.GetMouseButtonUp(0))
                 {
                     position = transform.position;
-                    //cambiamos el color 
-                    //TODO activar animación
-                    spriteRenderer.color = new Color(1, 1, 1);
+
                     //seteamos la velocidad
                     setVelocity(direction.normalized * velocity);
                     initialVelocity = actualVelocity;
@@ -188,7 +186,6 @@ public class PlayerManager : MonoBehaviour {
     {
         if (!moving && started)
         {
-            spriteRenderer.color = new Color(0.5f, 0.5f, 0.5f);
             mouseInitialPos = cam.WorldToScreenPoint(transform.position);
             clicked = true;
             arrow.SetActive(true);
